@@ -1,5 +1,6 @@
 import unittest
 
+
 class Alphabet:
     def __init__(self, alph):
         self.alph = alph
@@ -23,6 +24,39 @@ class Alphabet:
 
             return res
 
+    def to_word(self, num):
+        try:
+            ceil = int(num)
+            words = []
+
+            while ceil > 3:
+                remainder = ceil % len(self.alph)
+                ceil = ceil // len(self.alph)
+                if remainder == 0:
+                    ceil -= 1
+                    remainder = len(self.alph)
+                words = [remainder] + words
+                '''print('{}{}*3+{}'.format('(' * (len(words) - 1), ceil, remainder), end='')
+                for i in words[1:-1]:
+                    print(')3+{}'.format(i), end='')
+                if len(words) > 1:
+                    print(')3+{}'.format(words[-1]))
+                else:
+                    print()'''
+
+            words = [ceil] + words
+
+            for i in range(len(self.alph)):
+                for j in range(len(words)):
+                    if words[j] == i + 1:
+                        words[j] = self.alph[i]
+
+            return ''.join(words)
+
+        except ValueError:
+            return None
+
+
 class TestAlphabet(unittest.TestCase):
     def test_incorrect_alphabet(self):
         self.assertEqual(Alphabet('aa'), None)
@@ -39,9 +73,19 @@ class TestAlphabet(unittest.TestCase):
     def test_incorrect_word(self):
         self.assertEqual(Alphabet('abc').to_num('cabad'), None)
 
+    def test_321(self):
+        self.assertEqual(Alphabet('abc').to_word('321'), 'cbbac')
+
+    def test_34631(self):
+        self.assertEqual(Alphabet('abc').to_word('34631'), 'aacbaaaabb')
+
+    def test_incorrect_num(self):
+        self.assertEqual(Alphabet('abc').to_word('a321'), None)
+
+
 if __name__ == '__main__':
     unittest.main()
 
     a = Alphabet('abc')
 
-    print(a.to_num('caba'))
+    print(a.to_word('4'))
