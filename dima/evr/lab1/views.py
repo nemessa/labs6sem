@@ -1,14 +1,5 @@
 from random import randint
 
-mass = [16, 21, 8, 14, 26, 94, 30, 1]
-
-#mass = [22, 14, 9, 7, 7, 5, 5, 5]
-
-m = 14
-
-n = 4
-
-
 class Sort:
     @staticmethod
     def __find(mass_t, res):
