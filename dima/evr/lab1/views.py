@@ -2,116 +2,113 @@ from random import randint
 
 mass = [16, 21, 8, 14, 26, 94, 30, 1]
 
-mass = [22, 14, 9, 7, 7, 5,5,5]
+#mass = [22, 14, 9, 7, 7, 5, 5, 5]
 
 m = 14
 
 n = 4
 
-mass = []
 
-t ='a'
+class Sort:
+    @staticmethod
+    def __find(mass_t, res):
+        if len(mass_t) == 2:
+            if mass_t[0] > mass_t[1]:
+                res.append(mass_t[1])
+                return
+            else:
+                res.append(mass_t[0])
+                return
 
-for i in range(m):
-    tmp = randint(0, 100)
-    mass.append(tmp)
+        new_mass_t = []
 
-def prt(m):
-    for i in mass:
-        print('{} '.format(i) * n)
-mmm = mass.copy()
-prt(mass)
-res = []
+        for i in range(len(mass_t) // 2):
+            if mass_t[i*2] > mass_t[i*2+1]:
+                new_mass_t.append(mass_t[i*2+1])
+            else:
+                new_mass_t.append(mass_t[i*2])
+        if len(mass_t) % 2 == 1:
+            new_mass_t.append(mass_t[-1])
+        Sort.__find(new_mass_t, res)
 
-def t_find(mass_t):
-    if len(mass_t) == 2:
-        if mass_t[0] > mass_t[1]:
-            res.append(mass_t[1])
-            return
-        else:
-            res.append(mass_t[0])
-            return
+    @staticmethod
+    def t_sort(mass_t):
+        res = []
 
-    new_mass_t = []
+        for i in range(len(mass_t)):
+            Sort.__find(mass_t, res)
+            mass_t[mass_t.index(res[-1])] = 9999
 
-    for i in range(len(mass_t) // 2):
-        if mass_t[i*2] > mass_t[i*2+1]:
-            new_mass_t.append(mass_t[i*2+1])
-        else:
-            new_mass_t.append(mass_t[i*2])
-    if len(mass_t) % 2 == 1:
-        new_mass_t.append(mass_t[-1])
-    t_find(new_mass_t)
+        return res
 
-def t_sort(mass_t):
-    for i in range(len(mass_t)):
-        t_find(mass)
-        mass[mass.index(res[-1])] = 9999
-    return res
 
-def s(m):
-    r = 0
-    for i in m:
-        r += i
-    return r
+class Krit:
+    def __init__(self, n, m):
+        self.mass = []
+        for i in range(m):
+            self.mass.append(randint(10, 100))
+        self.n = n
 
-def e(p):
-    su = [s(i) for i in p]
+    def __sum(self, mass):
+        res = 0
+        for i in mass:
+            res += i
+        return res
 
-    return su.index(min(su))
+    def __union(self, mass):
+        tmp = [self.__sum(i) for i in mass]
 
-def krit(m, n):
-    p = [[0] for i in range(n)]
+        return tmp.index(min(tmp))
 
-    for i in m:
-        print(p)
-        p[e(p)].append(i)
+    def __krit(self, mass):
+        p = [[0] for i in range(self.n)]
 
-    return p
+        for i in self.mass:
+            p[self.__union(p)].append(i)
+            # print(p)
 
-print()
-print('T = {}'.format(list(reversed(t_sort(mass)))))
-mass = mmm.copy()
+        for i in range(len(p)):
+            print('p{} = {};  {}'.format(i + 1, self.__sum(p[i]), p[i]))
 
-res = []
-a = krit(list(reversed(t_sort(mass))), 4)
-mass = mmm.copy()
+        print('\n', '-' * 20, '\n', sep='')
 
+    def krit_withot_sort(self):
+        print('T = {}'.format(self.mass))
+
+        self.__krit(self.mass)
+
+
+    def krit_ascending(self):
+        mass = Sort.t_sort(self.mass.copy())
+        print(self.__print_matrix(mass))
+        print('T = {}'.format(mass))
+
+        self.__krit(mass)
+
+    def krit_descending(self):
+        mass = list(reversed(Sort.t_sort(self.mass.copy())))
+        print(self.__print_matrix(mass))
+        print('T = {}'.format(mass))
+
+        self.__krit(mass)
+
+    def __print_matrix(self, mass):
+        string = ''
+        for i in mass:
+            string += '{}  '.format(i) * self.n + '\n'
+
+        return string
+
+    def __str__(self):
+        string = ''
+        for i in self.mass:
+            string += '{}  '.format(i) * self.n + '\n'
+
+        return string
+
+a = Krit(8, 14)
 print(a)
 
-print()
-###
-for i in a:
-    print(s(i))
-###
-res = []
-mass = mmm.copy()
-print()
-print('T = {}'.format(mass))
-
-a = krit(mass, 4)
-print(a)
-
-mass = mmm.copy()
-print()
-
-for i in a:
-    print(s(i))
-mass = mmm.copy()
-####
-print()
-res = []
-print('T = {}'.format(t_sort(mass)))
-res = []
-mass = mmm.copy()
-
-a = krit(t_sort(mass), 4)
-res = []
-
-print(a)
-
-print()
-
-for i in a:
-    print(s(i))
-mass = mmm.copy()
+a.krit_withot_sort()
+a.krit_ascending()
+a.krit_descending()
