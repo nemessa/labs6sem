@@ -37,21 +37,24 @@ def word():
     tmp2 = 0
     tmp = ''
     result = ''
-    while (len(dict) <= number / len(dict)):
+    while (len(dict) <= number):
         if (number % len(dict) == 0):
             tmp = view
-            view += ') * {} * {} + {}'.format(number // len(dict) - 1, len(dict), len(dict))
+            view = ') * {} * {} + {} '.format(number // len(dict), len(dict), number % len(dict))
             view += tmp
-            word += '{}'.format(len(dict))
+            word += str(len(dict))
             number = number // len(dict) - 1
+            print(word, number)
         else:
             tmp = view
             view = ') * {} * {} + {} '.format(number // len(dict), len(dict), number % len(dict))
             view += tmp
-            word += '{}'.format(number % len(dict) // 1)
+            word += '{}'.format(number % len(dict))
             number = number // len(dict)
+            #print(word, number)
         tmp2 += 1
-    word += '{}'.format(len(dict))
+    if number > 0:
+        word += '{}'.format(number % len(dict))
     print('{}{}'.format('(' * tmp2, len(dict)) + view)
     for i in reversed(word):
         result += dict[(int(i) - 1)]

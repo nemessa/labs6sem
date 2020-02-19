@@ -3,7 +3,7 @@ from views import Alphabet
 n = input('If you wanna know word enter 1 or 2 if you wanna know number: ')
 
 if n == '1':
-    a = Alphabet(input('Enter an alphabet, only unique chars: '))
+    a = Alphabet(input('Enter an alphabet, only unique chars solid: '))
     if not a:
         print('Incorrect alphabet')
     else:
