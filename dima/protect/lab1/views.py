@@ -31,7 +31,7 @@ class Alphabet:
             ceil = int(num)
             words = []
 
-            while ceil > 3:
+            while ceil > len(self.alph):
                 remainder = ceil % len(self.alph)
                 ceil = ceil // len(self.alph)
                 if remainder == 0:
@@ -53,6 +53,7 @@ class Alphabet:
                 for j in range(len(words)):
                     if words[j] == i + 1:
                         words[j] = self.alph[i]
+
 
             return ''.join(words)
 
