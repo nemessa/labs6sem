@@ -1,0 +1,11 @@
+D:\Проекты\Романенко\Романенко\bin\Debug\netcoreapp3.1\Романенко.exe
+D:\Проекты\Романенко\Романенко\bin\Debug\netcoreapp3.1\Романенко.deps.json
+D:\Проекты\Романенко\Романенко\bin\Debug\netcoreapp3.1\Романенко.runtimeconfig.json
+D:\Проекты\Романенко\Романенко\bin\Debug\netcoreapp3.1\Романенко.runtimeconfig.dev.json
+D:\Проекты\Романенко\Романенко\bin\Debug\netcoreapp3.1\Романенко.dll
+D:\Проекты\Романенко\Романенко\bin\Debug\netcoreapp3.1\Романенко.pdb
+D:\Проекты\Романенко\Романенко\obj\Debug\netcoreapp3.1\Романенко.csprojAssemblyReference.cache
+D:\Проекты\Романенко\Романенко\obj\Debug\netcoreapp3.1\Романенко.AssemblyInfoInputs.cache
+D:\Проекты\Романенко\Романенко\obj\Debug\netcoreapp3.1\Романенко.AssemblyInfo.cs
+D:\Проекты\Романенко\Романенко\obj\Debug\netcoreapp3.1\Романенко.dll
+D:\Проекты\Романенко\Романенко\obj\Debug\netcoreapp3.1\Романенко.pdb
