@@ -16,11 +16,11 @@ class Alphabet:
             res = 0
             for i in range(len(word)):
                 res += (len(self.alph) ** (len(word) - i - 1)) * (self.alph.index(word[i]) + 1)
-                '''if i != len(word) - 1:
+                if i != len(word) - 1:
                     print('{}^({}-{})*{}'.format(len(self.alph), len(word), i + 1, self.alph.index(word[i]) + 1),
                           end=' + ')
                 else:
-                    print('{}^({}-{})*{}'.format(len(self.alph), len(word), i + 1, self.alph.index(word[i]) + 1))'''
+                    print('{}^({}-{})*{}'.format(len(self.alph), len(word), i + 1, self.alph.index(word[i]) + 1))
 
             return res
 
@@ -36,13 +36,13 @@ class Alphabet:
                     ceil -= 1
                     remainder = len(self.alph)
                 words = [remainder] + words
-                '''print('{}{}*3+{}'.format('(' * (len(words) - 1), ceil, remainder), end='')
+                print('{}{}*3+{}'.format('(' * (len(words) - 1), ceil, remainder), end='')
                 for i in words[1:-1]:
                     print(')3+{}'.format(i), end='')
                 if len(words) > 1:
                     print(')3+{}'.format(words[-1]))
                 else:
-                    print()'''
+                    print()
 
             words = [ceil] + words
 
@@ -81,6 +81,9 @@ class TestAlphabet(unittest.TestCase):
 
     def test_incorrect_num(self):
         self.assertEqual(Alphabet('abc').to_word('a321'), None)
+
+    '''def test_incorrect_num(self):
+        self.assertEqual(Alphabet('abc').to_word('888'), 'cabbac')'''
 
 
 if __name__ == '__main__':
