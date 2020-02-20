@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Проекты\\Романенко\\Романенко\\Романенко.csproj",
+      "projectUniqueName": "D:\\Проекты\\labs6sem\\sanya\\Romanenko\\Романенко\\Романенко.csproj",
       "projectName": "Романенко",
-      "projectPath": "D:\\Проекты\\Романенко\\Романенко\\Романенко.csproj",
+      "projectPath": "D:\\Проекты\\labs6sem\\sanya\\Romanenko\\Романенко\\Романенко.csproj",
       "packagesPath": "C:\\Users\\web\\.nuget\\packages\\",
-      "outputPath": "D:\\Проекты\\Романенко\\Романенко\\obj\\",
+      "outputPath": "D:\\Проекты\\labs6sem\\sanya\\Romanenko\\Романенко\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\web\\AppData\\Roaming\\NuGet\\NuGet.Config",

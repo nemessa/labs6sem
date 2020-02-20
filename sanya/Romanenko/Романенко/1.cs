@@ -59,7 +59,6 @@ namespace Романенко
                     view += ") * " + l.Length + " + " + l.Length + tmp;
                     word += l.Length;
                     N = N / l.Length - 1;
-
                 }
                 else
                 {
@@ -68,7 +67,6 @@ namespace Романенко
                     view = ") * " + l.Length + " + " + N % l.Length + tmp;
                     word += N % l.Length;
                     N = N / l.Length;
-
                 }
 
                 tmp2++;
