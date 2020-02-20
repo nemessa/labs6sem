@@ -40,22 +40,22 @@ def word():
     while (len(dict) <= number):
         if (number % len(dict) == 0):
             tmp = view
-            view = ') * {} * {} + {} '.format(number // len(dict), len(dict), number % len(dict))
             view += tmp
             word += str(len(dict))
             number = number // len(dict) - 1
-            print(word, number)
+            view = '{} * {} + {} '.format(number, len(dict), word[-1])
+            print(view)
         else:
             tmp = view
-            view = ') * {} * {} + {} '.format(number // len(dict), len(dict), number % len(dict))
             view += tmp
             word += '{}'.format(number % len(dict))
             number = number // len(dict)
-            #print(word, number)
+            view = '{} * {} + {} '.format(number, len(dict), word[-1])
+            print(view)
         tmp2 += 1
     if number > 0:
         word += '{}'.format(number % len(dict))
-    print('{}{}'.format('(' * tmp2, len(dict)) + view)
+        view += word
     for i in reversed(word):
         result += dict[(int(i) - 1)]
     print(result)

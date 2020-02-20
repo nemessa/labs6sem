@@ -9,3 +9,14 @@ D:\Проекты\Романенко\Романенко\obj\Debug\netcoreapp3.1\
 D:\Проекты\Романенко\Романенко\obj\Debug\netcoreapp3.1\Романенко.AssemblyInfo.cs
 D:\Проекты\Романенко\Романенко\obj\Debug\netcoreapp3.1\Романенко.dll
 D:\Проекты\Романенко\Романенко\obj\Debug\netcoreapp3.1\Романенко.pdb
+D:\Проекты\labs6sem\sanya\Romanenko\Романенко\bin\Debug\netcoreapp3.1\Романенко.exe
+D:\Проекты\labs6sem\sanya\Romanenko\Романенко\bin\Debug\netcoreapp3.1\Романенко.deps.json
+D:\Проекты\labs6sem\sanya\Romanenko\Романенко\bin\Debug\netcoreapp3.1\Романенко.runtimeconfig.json
+D:\Проекты\labs6sem\sanya\Romanenko\Романенко\bin\Debug\netcoreapp3.1\Романенко.runtimeconfig.dev.json
+D:\Проекты\labs6sem\sanya\Romanenko\Романенко\bin\Debug\netcoreapp3.1\Романенко.dll
+D:\Проекты\labs6sem\sanya\Romanenko\Романенко\bin\Debug\netcoreapp3.1\Романенко.pdb
+D:\Проекты\labs6sem\sanya\Romanenko\Романенко\obj\Debug\netcoreapp3.1\Романенко.csprojAssemblyReference.cache
+D:\Проекты\labs6sem\sanya\Romanenko\Романенко\obj\Debug\netcoreapp3.1\Романенко.AssemblyInfoInputs.cache
+D:\Проекты\labs6sem\sanya\Romanenko\Романенко\obj\Debug\netcoreapp3.1\Романенко.AssemblyInfo.cs
+D:\Проекты\labs6sem\sanya\Romanenko\Романенко\obj\Debug\netcoreapp3.1\Романенко.dll
+D:\Проекты\labs6sem\sanya\Romanenko\Романенко\obj\Debug\netcoreapp3.1\Романенко.pdb
