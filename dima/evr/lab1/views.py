@@ -97,9 +97,10 @@ class Krit:
 
         return string
 
-a = Krit(8, 14)
-print(a)
+if __name__ == '__main__':
+    a = Krit(8, 14)
+    print(a)
 
-a.krit_withot_sort()
-a.krit_ascending()
-a.krit_descending()
+    a.krit_withot_sort()
+    a.krit_ascending()
+    a.krit_descending()
