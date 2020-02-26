@@ -37,7 +37,7 @@ class Krit:
     def __init__(self, n, m):
         self.mass = []
         for i in range(m):
-            self.mass.append(randint(10, 100))
+            self.mass.append(randint(10, 22))
         self.n = n
 
     def __sum(self, mass):
@@ -51,6 +51,12 @@ class Krit:
 
         return tmp.index(min(tmp))
 
+
+    def __union2(self, mass):
+        tmp = [self.__sum(i) for i in mass]
+
+        return max(tmp)
+
     def __krit(self, mass):
         p = [[0] for i in range(self.n)]
 
@@ -60,6 +66,10 @@ class Krit:
 
         for i in range(len(p)):
             print('p{} = {};  {}'.format(i + 1, self.__sum(p[i]), p[i]))
+
+        print(p)
+
+        print('Tmax = {}'.format(self.__union2(p)))
 
         print('\n', '-' * 20, '\n', sep='')
 
