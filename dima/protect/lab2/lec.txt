@@ -1,0 +1,29 @@
+L1 = {a,ab,ac}   L1 = a + ab +abc = a(E + b(E + c))
+
+L2 = {c, cabc, cabcabc} L2 = c(a*b*c)^* = ((abc)^*)c
+
+1) a(b+c+d)a = {aba, aca, ada}
+2) a*b*c = (E+a1+a2+...)(E+b1+b2+...)c = {c, ac, bc, abc, aac, bbc, aabc}
+3) (a+b)(c+d) = {ac, ad, bc, bd}
+4) a(bc)*d = {ad, abcd, abcbcd, abcbcbcd}
+
+1) {ab, ac, ad} = a(b+c+d)
+2) {ab, ac, bb, bc} = (a+b)(b+c)
+3) {a,ab,ab^2,...} = ab*
+4) {ab,(ab)^2,..,} = (ab)^*(ab) = (ab)^+
+5) {ab, abb, aab, aabb} = a(E+b+a+ab+abb) = (a+aa)(b+bb)
+
+Построить регулярное выражение для множества всех элементов из алфавита E(сигма) = {a,b,c}
+Содержащих точно 2 символа 'b'
+
+{bb, abb, bab, bba,...}
+(a+c)*b*(a+c)*b(a+c)*
+2 и более 'b'
+(a+c+b)*b(a+c+b)*b(a+c+b)*
+
+0 1 где 1 четно
+0*+11*+0*+11*+0*
+
+11,110,101,011,1100,1010,1001,0101,0011,11110,11101
+
+(0*+1+0*+1+0*)*
