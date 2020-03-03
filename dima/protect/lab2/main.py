@@ -1,6 +1,72 @@
-import sympy
+class Qyest:
+    def __init__(self):
+        self.plus = None
+        self.multiply = None
+        self.increase = None
 
-class Alph:
+    def inc(self, mass, depth):
+        res = [['E']]
+        for i in range(depth - 1):
+            if len(res) == 1:
+                res.append(mass)
+            else:
+                res += [self.mul(res[-1], mass)]
+
+        '''result = []
+        for i in res[1:]:
+            result.append(i[0])
+        return result'''
+        return res
+
+    def mul(self, left, right):
+        every_step = [left.copy() for i in range(len(right))]
+        for i in range(len(right)):
+            for j in range(len(left)):
+                every_step[i][j] += right[i]
+
+
+        for i in range(len(every_step)):
+            j = 0
+            while j < len(every_step) - 1:
+                if 'E' in every_step[i][j]:
+                    every_step[i].pop(j)
+                else:
+                    j += 1
+
+        result = []
+        for i in every_step:
+            result += i
+
+        return result
+
+    def sum(self, left, right):
+        return left + right
+
+    def result_first(self):
+        '''a = self.inc(['0'], 3)
+        print(a)
+        b = ['1']
+        c = self.inc(['0'], 3)
+        d = ['1']
+        e = self.inc(['0'], 3)
+
+        a = self.sum(self.sum(self.sum(self.sum(a, b), c), d), e)
+
+        a = self.mul(a, a)'''
+        a = ['a', 'b', 'c']
+        a = self.inc(a, 4)
+        #print(a)
+        b = []
+        for i in a[1:]:
+            b = self.sum(b, self.mul(i.copy(), '!'))
+        a = b
+        print(a)
+        #a = self.mul(a, a)
+
+
+        #print(a)
+
+'''class Alph:
     def __init__(self):
         self. alph = '01'
 
@@ -25,10 +91,11 @@ class Alph:
         a = self.razl(x) + y + self.razl(x) + y + self.razl(x)
         sympy.pprint(a)
         ish = self.razl(a).expand()
-        sympy.pprint(ish)
+        sympy.pprint(ish)'''
 
 if __name__ == '__main__':
-    x = sympy.Symbol('x')
-    y = sympy.Symbol('y')
-    a = 1 + x + y
-    Alph().chet()
+    a = Qyest()
+    left = ['E', '1', '0']
+    right = ['1', '0', '1']
+    #print(a.inc(['0', '1'], 3))
+    a.result_first()
