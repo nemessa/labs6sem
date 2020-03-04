@@ -50,6 +50,10 @@ class OrderController(Controller):
 if __name__ == '__main__':
     a = ClientController(4)
     a.updateView()
+    a.setField('name', a.getField('name') + ' zad')
+
+    e = ClientController()
+    e.kill()
 
     b = ProcessorController(4)
     b.updateView()

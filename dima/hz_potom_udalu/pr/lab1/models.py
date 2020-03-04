@@ -82,11 +82,26 @@ class Model:
 
             cursor.execute(stmt)
 
-
+# один контроллер, самый верхний уровень с пользователем, проверяет на валидность
 class Client(Model):
     def __init__(self, id_db=None):
         self.table = 'clients'
         super().__init__(self.table, id_db)
+
+    def enough_balance(self, price):
+        with self.conn.cursor() as cursor:
+            stmt = sql.SQL("SELECT balance FROM clients WHERE id={}".format(self.id))
+
+            cursor.execute(stmt)
+
+            return price <= cursor.fetchone()[0]
+
+    def pay(self, price):
+        with self.conn.cursor() as cursor:
+            stmt = sql.SQL("UPDATE clients SET balance = clients.balance - {} WHERE id = {}".format(price, self.id))
+
+            cursor.execute(stmt)
+
 
 
 
@@ -107,14 +122,20 @@ class Basket(Model):
         self.table = 'basket'
         super().__init__(self.table, id_db)
 
+    def end_order(self, id_order):
+        with self.conn.cursor() as cursor:
+            stmt = sql.SQL("DELETE FROM {} WHERE id = {};".format(self.table, self.id))
+
+            cursor.execute(stmt)
+
 
 
 if __name__ == '__main__':
-    a = Client(12)
+    '''a = Client(2)
     print(a.getField('name'))
     a.setField('name', 'pri')
     print(a.getField('name'))
-    a.kill()
+    #a.kill()
 
     b = Order(12)
     print(b.getField('id'))
@@ -132,4 +153,7 @@ if __name__ == '__main__':
     print(d.getField('id_client'))
     d.setField('quantity', 12)
     print(d.getField('quantity'))
-    d.kill()
+    d.kill()'''
+
+    client = Client(1)
+    print(client.enough_balance(10000))

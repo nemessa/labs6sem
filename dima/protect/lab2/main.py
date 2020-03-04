@@ -103,6 +103,62 @@ class Qyest:
 
         #print(a)
 
+class Qyest2:
+    def __init__(self):
+        self.plus = None
+        self.multiply = None
+        self.increase = None
+
+    def inc(self, mass, depth):
+        res = [['']]
+        for i in range(depth):
+            if len(res) == 1:
+                res.append(mass)
+            else:
+                res += [self.mul(res[-1], mass)]
+
+        result = []
+        for i in res:
+            for j in i:
+                result.append(j)
+        return result
+
+    def mul(self, left, right):
+        every_step = [left.copy() for i in range(len(right))]
+        for i in range(len(right)):
+            for j in range(len(left)):
+                every_step[i][j] += right[i]
+
+        result = []
+        for i in every_step:
+            result += i
+
+        return result
+
+    def sum(self, left, right):
+        return left + right
+
+    # (0*10*10* + 0*110* + 10*10* + 0*10*1 + 10*1 + 11)*
+    def res_second(self):
+        a = self.inc(['0'], 5)
+        a = ['0']
+        b = ['1']
+        c = self.inc(['0'], 2)
+        c = ['0']
+        d = ['1']
+        e = self.inc(['0'], 2)
+        e = ['0']
+        a = self.inc(['0'], 2)
+        c = self.inc(['0'], 2)
+        e = self.inc(['0'], 2)
+        a1 = self.mul(self.mul(self.mul(self.mul(a, b), c), d), e)
+        #a1 = self.inc(a1, 2)
+        print(a1)
+        a2 = self.mul(self.mul(self.mul(self.mul(self.mul(self.mul(a, b), c), d), e), b), a)
+        #a2 = self.mul(self.mul(self.mul(self.mul(self.mul(self.mul(a, b), c), d), e), b), a)
+        #a2 = self.inc(a2, 2)
+        print(a2)
+
 
 
 '''class Alph:
@@ -145,7 +201,7 @@ def t():
 
 
 if __name__ == '__main__':
-    a = Qyest()
+    a = Qyest2()
     left = ['0', '1', '0']
     right = ['1', '00', '1']
     #print(a.inc(['0', '1'], 3))
