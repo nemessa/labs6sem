@@ -1,10 +1,6 @@
 import numpy as np
 
 
-'''a = np.random.randint(10, 25, 10)
-print(a)
-print(a.sum())'''
-
 class Sort:
     @staticmethod
     def __find(mass_t, res):
@@ -83,6 +79,28 @@ class Proiz:
         print('max({}); Tmax = {}'.format(res[-1], max(res[-1])))
         print('\n*******************************\n')
 
+    def __minim(self, mass):
+        res = [[0 for j in range(len(mass[0]))] for i in range(len(mass))]
+        m = mass[0].min()
+        res[0][self.__index(mass[0], m)] = m
+        for i in range(1, len(mass)):
+            tmp = res[i-1].copy()
+            for j in range(len(mass[i])):
+                tmp[j] = mass[i][j]
+
+            res[i] = res[i-1].copy()
+            res[i][tmp.index(min(tmp))] += min(tmp)
+
+        self.print_matrix(res)
+
+        print('max({}); Tmax = {}'.format(res[-1], max(res[-1])))
+        print('\n*******************************\n')
+
+    def minim_without_sort(self):
+        print('Without sort minim: ')
+        self.print_matrix(self.mass)
+        self.__minim(self.mass)
+
     def arbitrary_without_sort(self):
         print('Without sort: ')
         self.print_matrix(self.mass)
@@ -119,10 +137,24 @@ class Proiz:
 
 
 if __name__ == '__main__':
-    a = Proiz(15, 4)
+
+    left = 10
+    right = 19
+
+    nn = int(input('Enter n: '))
+    mm = int(input('Enter m: '))
+    a = Proiz(nn, mm, left, right)
+
     a.print_matrix(a.mass)
-    a.arbitrary_ascending_sort()
-    a.arbitrary_descending_sort()
-    a.arbitrary_without_sort()
-    '''aa = np.array([i[1]] for i in a.sort())
-    print(aa)'''
+
+    while True:
+        n = input('1) Sort Ascending\n2) Sort Descending\n3) Without sort\n4) Minimal element without sort\n')
+
+        if n == '1':
+            a.arbitrary_ascending_sort()
+        elif n == '2':
+            a.arbitrary_descending_sort()
+        elif n == '3':
+            a.arbitrary_without_sort()
+        elif n == '4':
+            a.minim_without_sort()
