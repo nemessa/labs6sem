@@ -2,10 +2,10 @@ from psycopg2 import sql
 import psycopg2
 import config
 
+
 class argsError(Exception):
     pass
-# поменять всё на индексы, доделать изменение и удаления по словарю
-# доделать проверку на баланс
+
 
 class Model:
     def __init__(self, table):
@@ -37,12 +37,17 @@ class Model:
             raise argsError('args not in args table {}'.format(self.table))
         with self.conn.cursor() as cursor:
             for i in dict:
-                stmt = sql.SQL("UPDATE {} SET {} = {} WHERE id = {};".format(self.table, i, dict[i], key))
+                if isinstance(dict[i], str):
+                    field = "'{}'".format(dict[i])
+                else:
+                    field = dict[i]
+                stmt = sql.SQL("UPDATE {} SET {} = {} WHERE id = {};".format(self.table, i, field, key))
                 cursor.execute(stmt)
 
         self.key = None
 
     def __delitem__(self, key):
+        self.check_exist_id(key)
         with self.conn.cursor() as cursor:
             stmt = sql.SQL("DELETE FROM {} WHERE id = {};".format(self.table, key))
             cursor.execute(stmt)
@@ -60,13 +65,13 @@ class Model:
             if mass[0] == '' and mass[1] == '':
                 mass[0] = i
                 if isinstance(dict[i], str):
-                    mass[1] = '"{}"'.format(dict[i])
+                    mass[1] = "'{}'".format(dict[i])
                 else:
                     mass[1] = "{}".format(dict[i])
             else:
                 mass[0] = "{}, {}".format(mass[0], i)
                 if isinstance(dict[i], str):
-                    mass[1] = '{}, "{}"'.format(mass[1], dict[i])
+                    mass[1] = "{}, '{}'".format(mass[1], dict[i])
                 else:
                     mass[1] = "{}, {}".format(mass[1], dict[i])
 
@@ -104,6 +109,14 @@ class Model:
                 res.append(i[0])
 
             return res
+
+    def toDict(self):
+        record = self[self.id].get_record()
+        titles = self.showFields()
+        request = {}
+        for i in range(len(titles)):
+            request[titles[i]] = record[i]
+        return request
 
     def get_record(self):
         with self.conn.cursor() as cursor:
@@ -183,6 +196,21 @@ class Processor(Model):
         self.table = 'processors'
         super().__init__(self.table)
 
+    def check_balance(self, proc, quant):
+        with self.conn.cursor() as cursor:
+            stmt = sql.SQL("SELECT quantity FROM processors WHERE id = {};".format(proc))
+            cursor.execute(stmt)
+            return quant <= cursor.fetchone()[0]
+
+
+    # Проверить эту функцию, сделать списание из ордера, где в ордере проходит по всем товарам
+    # если остаток больше, то списывает, инчае ошибка
+    def write_off(self, proc, quant):
+        if self.check_balance(proc, quant):
+            request = self[proc].toDict()
+            request['balance'] -= quant
+            self[proc] = request
+
 
 class Basket(Model):
     def __init__(self):
@@ -200,12 +228,31 @@ class Basket(Model):
             if responce:
                 self[responce[0]] = {'quantity': responce[2] + 1}
             else:
+                # _ o _
+                #  \|/
+                #  / \
                 stmt = sql.SQL("SELECT * FROM basket INNER JOIN orders ON orders.id = id_order"
                                " WHERE id_client = {} AND orders.date_order IS null;".format(id_client))
                 cursor.execute(stmt)
                 self.append({'id_processor': id_cpu, 'quantity': 1,
                              'id_client': id_client, 'id_order': cursor.fetchone()[-3]})
 
+    def remove_from_basket(self, id_cpu, id_client):
+        with self.conn.cursor() as cursor:
+            stmt = sql.SQL("SELECT basket.id, quantity FROM basket INNER JOIN orders ON orders.id = id_order"
+                           " WHERE id_processor = {} AND id_client = {} AND orders.date_order IS null;".format(id_cpu,
+                                                                                                               id_client))
+            cursor.execute(stmt)
+            result = cursor.fetchone()
+            if result:
+                if result[1] > 1:
+                    request = self[result[0]].toDict()
+                    request['quantity'] -= 1
+                    self[result[0]] = request
+                elif result[1] == 1:
+                    del self[result[1]]
+
+    # возвращает объединение корзины и заказа где id клиента есть в заказах
     def get_basket(self, id_client):
         with self.conn.cursor() as cursor:
             stmt = sql.SQL("SELECT * FROM basket INNER JOIN orders ON orders.id = id_order"
@@ -213,9 +260,14 @@ class Basket(Model):
             cursor.execute(stmt)
             return cursor.fetchall()
 
-    def pri
+    def get_porc_from_basket(self, id_client):
+        with self.conn.cursor() as cursor:
+            stmt = sql.SQL("SELECT processors.name, processors.price, basket.quantity FROM basket "
+                           "INNER JOIN processors ON processors.id = id_processor"
+                           " WHERE id_client = {};".format(id_client))
+            cursor.execute(stmt)
+            return cursor.fetchall()
+
 
 if __name__ == '__main__':
-
     a = Basket()
-    print(a.get_basket(2))
