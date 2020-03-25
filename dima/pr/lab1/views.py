@@ -4,6 +4,13 @@ import config
 
 from models import *
 
+'''Пользователь видит список процессоров +++
+Пользователь может посмотреть список товаров в корзине +++
+Пользователь может добавить в корзину товар, увеличить его количество в корзине, удалить из корзины +++
+При нажатии кнопки оплатить идет проверка на количество денег, если денег хватает, то идет проверка на наличие на складе +++
+если хватает денег и хватает товаров на складе
+то товар спиывается со склада, у пользователя списываются деньги за товар, в поле дата заказа появляется NOW()'''
+
 class View:
     def __convert_to_mass(self, typl):
         res = []
@@ -31,12 +38,15 @@ class View:
         print()
 
     def print_responses(self, table, mass, fields):
-        print(table)
+        print(table, ': ')
         for i in mass:
             response = self.response_field(i, fields)
             for i in response:
                 print('{}: {}'.format(i, response[i]))
             print()
+
+    def print_error(self, text):
+        print('Error: {}'.format(text))
 
 
 if __name__ == '__main__':
