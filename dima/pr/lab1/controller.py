@@ -20,6 +20,7 @@ class Controller:
         Basket().check_in_the_processors(id_cpu)
         Basket().add_to_basket(id_cpu, id_client)
 
+    # end
     def remove_from_basket(self, id_cpu, id_client):
         Basket().check_in_the_clients(id_client)
         Basket().check_in_the_processors(id_cpu)

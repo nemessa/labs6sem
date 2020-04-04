@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, create_engine, Date, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, relationship
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy.engine.url import URL
 from config import DATABASE
 
@@ -87,13 +87,13 @@ class Basket(Base):
     id_order = Column(Integer, ForeignKey('orders.id'))
 
     def __init__(self, id_processor, quantity, id_client, id_order):
-        id_processor = id_processor
-        quantity = quantity
-        id_client = id_client
-        id_order = id_order
+        self.id_processor = id_processor
+        self.quantity = quantity
+        self.id_client = id_client
+        self.id_order = id_order
 
     def __repr__(self):
-        return """Order{
+        return """Basket{
     id: %s,
     id_processor = %s,
     quantity = %s,
@@ -119,8 +119,9 @@ def main():
 
 
 
-    for basket in session.query(Basket, Processor).join(Basket.id_processor == Processor.id):
+    for basket, processor in session.query(Basket).join(Processor).filter(Basket.id_processor == Processor.id):
         print(basket)
+        print(processor)
 
 if __name__ == '__main__':
     main()
