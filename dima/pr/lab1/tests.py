@@ -1,21 +1,33 @@
-class test:
-    def __init__(self):
-        self.mass = list(range(10))
+from sqlalchemy import Column, Integer, String, create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.engine.url import URL
+from config import DATABASE
 
-    def __getitem__(self, key):
-        self.key = key
-        return self
 
-    def __setitem__(self, key, value):
-        self.mass[key] = value
+Base = declarative_base()
 
-    def __delitem__(self, key):
-        del self.mass[key]
+class Client(Base):
+    __tablename__ = 'clients'
 
-    def mul(self, value):
-        self.mass[self.key] *= value
+    id = Column(Integer, primary_key=True)
+    name = Column('name', String)
+    balance = Column('balance', String, default=0)
+
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        return "<Client('{}','{}','{}')>".format(self.id, self.name, self.balance)
+
+def main():
+    engine = create_engine(URL(**DATABASE), echo=False)
+    Base.metadata.create_all(engine)
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    for client in session.query(Client).filter(Client.name.contains('a')).order_by(Client.balance)[::-1]:
+        print(client)
 
 if __name__ == '__main__':
-    a = test()
-    del a[1]
-    print(a.mass)
+    main()
