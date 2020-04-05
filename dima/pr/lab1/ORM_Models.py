@@ -57,8 +57,44 @@ class Processor(Base):
     balance = Column(Integer, default=0)
 
     def __init__(self, **kwargs):
-        for i in kwargs:
-            eval('self.{} = {}'.format(i, kwargs[i]))
+        if 'name' in kwargs:
+            self.name = kwargs['name']
+        if 'price' in kwargs:
+            self.price = kwargs['price']
+        if 'clock' in kwargs:
+            self.clock = kwargs['clock']
+        if 'cores' in kwargs:
+            self.cores = kwargs['cores']
+        if 'threads' in kwargs:
+            self.threads = kwargs['threads']
+        if 'l1_cache' in kwargs:
+            self.l1_cache = kwargs['l1_cache']
+        if 'l2_cache' in kwargs:
+            self.l2_cache = kwargs['l2_cache']
+        if 'l3_cache' in kwargs:
+            self.l3_cache = kwargs['l3_cache']
+        if 'process_t' in kwargs:
+            self.process_t = kwargs['process_t']
+
+    def update_characteristics(self, **kwargs):
+        if 'name' in kwargs:
+            self.name = kwargs['name']
+        if 'price' in kwargs:
+            self.price = kwargs['price']
+        if 'clock' in kwargs:
+            self.clock = kwargs['clock']
+        if 'cores' in kwargs:
+            self.cores = kwargs['cores']
+        if 'threads' in kwargs:
+            self.threads = kwargs['threads']
+        if 'l1_cache' in kwargs:
+            self.l1_cache = kwargs['l1_cache']
+        if 'l2_cache' in kwargs:
+            self.l2_cache = kwargs['l2_cache']
+        if 'l3_cache' in kwargs:
+            self.l3_cache = kwargs['l3_cache']
+        if 'process_t' in kwargs:
+            self.process_t = kwargs['process_t']
 
     def __repr__(self):
         return """Processor{
@@ -108,20 +144,6 @@ def main():
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    for client in session.query(Client):
-        print(client)
-
-    for order in session.query(Order):
-        print(order)
-
-    for processor in session.query(Processor):
-        print(processor)
-
-
-
-    for basket, processor in session.query(Basket).join(Processor).filter(Basket.id_processor == Processor.id):
-        print(basket)
-        print(processor)
-
 if __name__ == '__main__':
-    main()
+    #main()
+    pass
