@@ -12,7 +12,8 @@ from models import lacksError
 Пользователь видит список процессоров +++
 Пользователь может посмотреть список товаров в корзине +++
 Пользователь может добавить в корзину товар, увеличить его количество в корзине, удалить из корзины +++
-При нажатии кнопки оплатить идет проверка на количество денег, если денег хватает, то идет проверка на наличие на складе +++
+При нажатии кнопки оплатить идет проверка на количество денег, если денег хватает, 
+то идет проверка на наличие на складе +++
 если хватает денег и хватает товаров на складе
 то товар спиывается со склада, у пользователя списываются деньги за товар, в поле дата заказа появляется NOW()
 '''
@@ -204,12 +205,13 @@ class ManagerService:
         session.commit()
 
 
-
-
 if __name__ == '__main__':
     engine = create_engine(URL(**DATABASE), echo=False)
     Session = sessionmaker(bind=engine)
     session = Session()
+    for i in ClientService().show_basket(1):
+        print(i)
+    #print(str(ClientService().show_basket(1)))
 
     '''ManagerService().insert_new_processor(name = 'AMD Ryzen 9 3900X TRAY',
                                           price = 454,
@@ -219,8 +221,8 @@ if __name__ == '__main__':
                                           l3_cache = 64,
                                           process_t = 12)'''
 
-    ManagerService().update_characteristics(id_processor=9,
+    '''ManagerService().update_characteristics(id_processor=9,
                                           name='AMD Ryzen 9 39asd00X TRAY',
                                           price=44,
                                           clock=460,
-                                          cores=122)
+                                          cores=122)'''
