@@ -10,7 +10,6 @@ namespace lab2
 {
     [Serializable]
     public partial class Graph {
-        //kak zdelat Matrix-Lines -> Matrix-Line -> Weight?
         [XmlArray("Lines"), XmlArrayItem("Line")]
         public List< List<int> > matrix = new List< List<int> >();
         public Graph() : this(0) {}
@@ -50,12 +49,15 @@ namespace lab2
             using (Stream st1 = new FileStream("somefile1.xml", FileMode.Open, FileAccess.Read) )
             using (Stream st2 = new FileStream("somefile2.xml", FileMode.Create) ) {
                 Graph G1 = Graph.DeserializeFromXml(st1);
+                G1.SetWeight(2,1,32);
+                G1.AddVertex();
                 Graph.SerializeXmlTo(G1, st2);
             }
+            
         
-            using(Stream st1 = new FileStream("somefile1.xml", FileMode.Open, FileAccess.Write) ) {
+            /*using(Stream st1 = new FileStream("somefile1.xml", FileMode.Open, FileAccess.Write) ) {
                 Graph.SerializeXmlTo(G, st1);
-            }
+            }*/
         }
     }
 }
