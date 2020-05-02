@@ -1,14 +1,30 @@
 <?xml version="1.0"?>
-<Graph xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<Graph xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Lines>
     <Line>
+      <int>1</int>
+      <int>2</int>
+      <int>3</int>
+      <int>4</int>
+      <int>322</int>
+    </Line>
+    <Line>
+      <int>5</int>
+      <int>6</int>
+      <int>32</int>
       <int>0</int>
-      <int>0</int>
+<<<<<<< HEAD
+=======
+    </Line>
+    <Line>
+      <int>8</int>
       <int>0</int>
       <int>0</int>
     </Line>
     <Line>
+      <int>9</int>
       <int>0</int>
+>>>>>>> 2d5b20860bb57532eafbb06b736b9124a9ecc9cb
     </Line>
     <Line>
       <int>0</int>
