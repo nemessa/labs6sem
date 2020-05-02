@@ -43,7 +43,7 @@ namespace lab2
         public static Graph DeserializeFromXml(Stream st) => (Graph) new XmlSerializer(typeof(Graph)).Deserialize(st);
     }
 
-    class Lab8 {
+    class Lab2 {
         public static void Main() {
             Graph G = new Graph(4);
             G.AddVertex();
@@ -53,9 +53,9 @@ namespace lab2
                 Graph.SerializeXmlTo(G1, st2);
             }
         
-            using(Stream st1 = new FileStream("somefile1.xml", FileMode.Open, FileAccess.Write) ) {
+            /*using(Stream st1 = new FileStream("somefile1.xml", FileMode.Open, FileAccess.Write) ) {
                 Graph.SerializeXmlTo(G, st1);
-            }
+            }*/
         }
     }
 }
